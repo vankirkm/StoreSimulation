@@ -23,4 +23,6 @@ public class Customer {
     public double getTimePerItem(){
         return this.timePerItem;
     }
+
+
 }
