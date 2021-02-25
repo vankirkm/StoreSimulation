@@ -1,8 +1,8 @@
 package main;
 
-public class CustomerEndShopping extends Event{
+public class CustomerEndCheckout extends Event{
 
-    public CustomerEndShopping(double startTime, Customer customer, String eventType){
+    public CustomerEndCheckout(double startTime, Customer customer, String eventType){
         super(startTime, customer, eventType);
     }
 
