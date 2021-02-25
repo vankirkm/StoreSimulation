@@ -24,5 +24,9 @@ public class Customer {
         return this.timePerItem;
     }
 
+    public String toString(){
+        return this.arrivalTime + " " + this.numItems + " " + this.timePerItem;
+    }
+
 
 }

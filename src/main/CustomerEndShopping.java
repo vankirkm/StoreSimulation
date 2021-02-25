@@ -2,8 +2,12 @@ package main;
 
 public class CustomerEndShopping extends Event{
 
+    public CustomerEndShopping(double startTime, Customer customer){
+        super(startTime, customer);
+    }
+
     @Override
-    public double getEventStartTime() {
+    public double getEventTime() {
         return 0;
     }
 }
