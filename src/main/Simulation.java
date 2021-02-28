@@ -24,15 +24,17 @@ public class Simulation {
 
             case("CustomerArrival"):
                 Event endShopping = new CustomerEndShopping(eventQueue.poll(), "CustomerEndShopping");
-                System.out.println("OG start time: " + endShopping.getStartTime());
                 endShopping.calculateEventStartTime();
                 eventQueue.offer(endShopping);
-                System.out.println(endShopping.getStartTime());
                 break;
 
             //end customer shopping, schedule them for checkout, and put them in checkout queue.
             case("CustomerEndShopping"):
                 Event endCheckout = new CustomerEndCheckout(eventQueue.poll(), "CustomerEndCheckout");
+                break;
+
+            //end customer checkout
+            case("CustomerEndCheckout"):
                 break;
         }
     }
@@ -62,4 +64,5 @@ public class Simulation {
         }
         return eventQueue;
     }
+
 }
