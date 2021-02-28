@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Queue;
 
 public class CheckoutArea {
     private ArrayList<CheckoutLane> lanes;
@@ -20,18 +21,39 @@ public class CheckoutArea {
                 lanes.add(regular);
             }
             else{
-                CheckoutLane closed = new RegularLane();
-                closed.setClosed();
+                CheckoutLane closed = new ClosedLane();
                 lanes.add(closed);
             }
         }
     }
 
-    public void getShortestExpressLane(){
+    public void addCustToQueue(Customer customer){
+        if(customer.getNumItems() <= 12){
 
+        }
     }
 
-    public void getShortestLane(){
+    public int getShortestOverallIndex(){
+        int shortestIndex = Integer.MAX_VALUE;
+        for(int i = 0; i < lanes.size(); i++){
 
+            if(lanes.get(i) instanceof RegularLane && lanes.get(i).getLineLength() < shortestIndex){
+                shortestIndex = i;
+            }
+            if(lanes.get(i).getLineLength() < shortestIndex){
+                shortestIndex = i;
+            }
+        }
+        return shortestIndex;
+    }
+
+    public int getShortestRegularIndex(){
+        int shortestIndex = Integer.MAX_VALUE;
+        for(int i = 0; i < lanes.size(); i++){
+            if(lanes.get(i) instanceof RegularLane && lanes.get(i).getLineLength() < shortestIndex){
+                shortestIndex = i;
+            }
+        }
+        return shortestIndex;
     }
 }

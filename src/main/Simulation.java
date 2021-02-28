@@ -52,6 +52,7 @@ public class Simulation {
 
             //end customer checkout
             case("CustomerEndCheckout"):
+                checkoutArea.addCustToQueue(eventQueue.peek().getCustomer());
                 break;
         }
     }
