@@ -19,11 +19,20 @@ public class Simulation {
         return eventQueue.isEmpty();
     }
 
-    public void executeCycle(){
-        Event event = eventQueue.poll();
-        switch(event.getEventType()){
+    public void processEvent(){
+        switch(eventQueue.peek().getEventType()){
+
             case("CustomerArrival"):
-                System.out.println(event.getStartTime());
+                Event endShopping = new CustomerEndShopping(eventQueue.poll(), "CustomerEndShopping");
+                System.out.println("OG start time: " + endShopping.getStartTime());
+                endShopping.calculateEventStartTime();
+                eventQueue.offer(endShopping);
+                System.out.println(endShopping.getStartTime());
+                break;
+
+            //end customer shopping, schedule them for checkout, and put them in checkout queue.
+            case("CustomerEndShopping"):
+                Event endCheckout = new CustomerEndCheckout(eventQueue.poll(), "CustomerEndCheckout");
                 break;
         }
     }

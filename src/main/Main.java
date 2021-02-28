@@ -5,7 +5,7 @@ public class Main {
         String filename = "arrival medium.txt";
         Simulation newSim = new Simulation(filename);
         while(!newSim.isFinished()){
-            newSim.executeCycle();
+            newSim.processEvent();
         }
     }
 }
