@@ -1,4 +1,4 @@
 package main;
 
-public class RegularLane {
+public class RegularLane extends CheckoutLane{
 }

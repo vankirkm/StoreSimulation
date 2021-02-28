@@ -10,8 +10,25 @@ import java.util.PriorityQueue;
 public class Simulation {
     private double simTime;
     private PriorityQueue<Event> eventQueue;
+    private CheckoutArea checkoutArea;
+    private String[] laneConfig = new String[] {
+            "express",
+            "express",
+            "express",
+            "regular",
+            "regular",
+            "regular",
+            "regular",
+            "regular",
+            "regular",
+            "closed",
+            "closed",
+            "closed"};
 
     public Simulation(String fileName){
+        simTime = 0;
+        checkoutArea = new CheckoutArea();
+        checkoutArea.initLanes(laneConfig);
         this.eventQueue = createEventQueue(fileName);
     }
 
