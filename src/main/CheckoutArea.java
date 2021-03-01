@@ -4,43 +4,46 @@ import java.util.ArrayList;
 import java.util.Queue;
 
 public class CheckoutArea {
-    private ArrayList<CheckoutLane> lanes;
+    private CheckoutLane[] lanes;
 
     public CheckoutArea(){
-        lanes = new ArrayList<CheckoutLane>();
+        lanes = new CheckoutLane[12];
     }
 
     public void initLanes(String[] laneConfig){
-        for(String lane : laneConfig){
-            if(lane.equals("express")){
+        for(int i = 0; i < 12; i++){
+            if(laneConfig[i].equals("express")){
                 CheckoutLane express = new ExpressLane();
-                lanes.add(express);
+                lanes[i] = express;
             }
-            else if(lane.equals("regular")){
+            else if(laneConfig[i].equals("regular")){
                 CheckoutLane regular = new RegularLane();
-                lanes.add(regular);
+                lanes[i] = regular;;
             }
             else{
                 CheckoutLane closed = new ClosedLane();
-                lanes.add(closed);
+                lanes[i] = closed;
             }
         }
     }
 
     public void addCustToQueue(Customer customer){
         if(customer.getNumItems() <= 12){
-
+            lanes[getShortestOverallIndex()].addCustomer(customer);
+        }
+        else{
+            lanes[getShortestRegularIndex()].addCustomer(customer);
         }
     }
 
     public int getShortestOverallIndex(){
         int shortestIndex = Integer.MAX_VALUE;
-        for(int i = 0; i < lanes.size(); i++){
+        for(int i = 0; i < lanes.length; i++){
 
-            if(lanes.get(i) instanceof RegularLane && lanes.get(i).getLineLength() < shortestIndex){
+            if(lanes[i] instanceof RegularLane && lanes[i].getLineLength() < shortestIndex){
                 shortestIndex = i;
             }
-            if(lanes.get(i).getLineLength() < shortestIndex){
+            if(lanes[i] instanceof ExpressLane && lanes[i].getLineLength() <= shortestIndex){
                 shortestIndex = i;
             }
         }
@@ -49,8 +52,8 @@ public class CheckoutArea {
 
     public int getShortestRegularIndex(){
         int shortestIndex = Integer.MAX_VALUE;
-        for(int i = 0; i < lanes.size(); i++){
-            if(lanes.get(i) instanceof RegularLane && lanes.get(i).getLineLength() < shortestIndex){
+        for(int i = 0; i < lanes.length; i++){
+            if(lanes[i] instanceof RegularLane && lanes[i].getLineLength() < shortestIndex){
                 shortestIndex = i;
             }
         }

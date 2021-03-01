@@ -10,4 +10,8 @@ public abstract class CheckoutLane {
         return customers.size();
     }
 
+    public void addCustomer(Customer customer){
+        customers.offer(customer);
+    }
+
 }
