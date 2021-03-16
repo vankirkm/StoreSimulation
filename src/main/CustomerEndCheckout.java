@@ -12,5 +12,13 @@ public class CustomerEndCheckout extends Event{
 
     @Override
     public void calculateEventStartTime() {
+        if(this.getCustomer().getCustomerLane() instanceof ExpressLane){
+            double startTime = (getCustomer().getNumItems() * 0.1) + 1;
+            setStartTime(startTime);
+        }
+        else{
+            double startTime = (getCustomer().getNumItems() * 0.05) + 2;
+            setStartTime(startTime);
+        }
     }
 }

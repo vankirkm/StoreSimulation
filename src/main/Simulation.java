@@ -46,13 +46,17 @@ public class Simulation {
                 break;
 
             //end customer shopping, schedule them for checkout, and put them in checkout queue.
+            //if their lane is empty, immediately schedule a CustomerEndCheckout event
             case("CustomerEndShopping"):
-                Event endCheckout = new CustomerEndCheckout(eventQueue.poll(), "CustomerEndCheckout");
+                checkoutArea.addCustomerToQueue(eventQueue.poll().getCustomer());
+
                 break;
 
             //end customer checkout
             case("CustomerEndCheckout"):
-                checkoutArea.addCustToQueue(eventQueue.peek().getCustomer());
+                //we need to take the customer out of the checkout line they are currently in and
+                //add a new CustomerEndCheckout for the next person in line.
+                eventQueue.peek().getCustomer();
                 break;
         }
     }
@@ -65,17 +69,19 @@ public class Simulation {
             BufferedReader br = new BufferedReader(new FileReader("data/" + filename));
             String line;
             boolean keepGoing = true;
+            int customerCount = 1;
             while(keepGoing){
                 try{
                     line = br.readLine();
                     String[] fields = line.split("\\s+");
-                    Customer newCust = new Customer(Double.parseDouble(fields[0]), Integer.parseInt(fields[1]), Double.parseDouble(fields[2]));
+                    Customer newCust = new Customer(Double.parseDouble(fields[0]), Integer.parseInt(fields[1]), Double.parseDouble(fields[2]), customerCount);
                     eventQueue.offer(new CustomerArrival(newCust.getArrivalTime(), newCust, "CustomerArrival"));
                 }catch(IOException e){
                     keepGoing = false;
                 }catch(NullPointerException e1){
                     keepGoing = false;
                 }
+                customerCount++;
             }
         }catch(FileNotFoundException e){
             System.out.println("File does not exist. Please check path and try again.");
