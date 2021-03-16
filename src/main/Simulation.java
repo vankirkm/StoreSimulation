@@ -11,6 +11,7 @@ public class Simulation {
     private double simTime;
     private PriorityQueue<Event> eventQueue;
     private CheckoutArea checkoutArea;
+    private double avgWait;
     private String[] laneConfig = new String[] {
             "express",
             "express",
@@ -29,6 +30,7 @@ public class Simulation {
         simTime = 0;
         checkoutArea = new CheckoutArea();
         checkoutArea.initLanes(laneConfig);
+        avgWait = 0;
         this.eventQueue = createEventQueue(fileName);
     }
 
@@ -48,8 +50,7 @@ public class Simulation {
             //end customer shopping, schedule them for checkout, and put them in checkout queue.
             //if their lane is empty, immediately schedule a CustomerEndCheckout event
             case("CustomerEndShopping"):
-                checkoutArea.addCustomerToQueue(eventQueue.poll().getCustomer());
-
+                checkoutArea.addCustomerToQueue(eventQueue.peek().getCustomer());
                 break;
 
             //end customer checkout
@@ -60,6 +61,15 @@ public class Simulation {
                 break;
         }
     }
+
+    public void processCheckouts(){
+        for(CheckoutLane lane : checkoutArea.getLanes()){
+            if(!lane.getCustomers().peek().isCheckingOut()){
+
+            }
+        }
+    }
+
 
 
     //read customer list in from file, and create an arrival event queue based on what time each customer event takes place

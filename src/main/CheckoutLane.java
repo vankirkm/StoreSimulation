@@ -24,4 +24,7 @@ public abstract class CheckoutLane {
         customers.offer(customer);
     }
 
+    public Queue<Customer> getCustomers() {
+        return customers;
+    }
 }

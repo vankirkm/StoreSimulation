@@ -8,6 +8,7 @@ public class Customer {
     private int numItems;
     private double timePerItem;
     private CheckoutLane customerLane;
+    private boolean isCheckingOut;
     private int customerNumber;
 
     public Customer(double arrivalTime, int numItems, double timePerItem, int customerNumber){
@@ -41,5 +42,7 @@ public class Customer {
         return this.arrivalTime + " " + this.numItems + " " + this.timePerItem;
     }
 
-
+    public boolean isCheckingOut() {
+        return isCheckingOut;
+    }
 }

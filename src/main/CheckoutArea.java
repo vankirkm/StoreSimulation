@@ -63,4 +63,8 @@ public class CheckoutArea {
         }
         return shortestIndex;
     }
+
+    public CheckoutLane[] getLanes() {
+        return lanes;
+    }
 }
