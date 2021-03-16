@@ -29,11 +29,14 @@ public class CheckoutArea {
 
     public void addCustomerToQueue(Customer customer){
         if(customer.getNumItems() <= 12){
-            lanes[getShortestOverallIndex()].addCustomer(customer);
-            customer.setCustomerCheckoutLine(lanes[getShortestOverallIndex()]);
+            int lane = getShortestOverallIndex();
+            lanes[lane].addCustomer(customer);
+            customer.setCustomerCheckoutLine(lanes[lane]);
         }
         else{
-            lanes[getShortestRegularIndex()].addCustomer(customer);
+            int lane = getShortestRegularIndex();
+            lanes[lane].addCustomer(customer);
+            customer.setCustomerCheckoutLine(lanes[lane]);
         }
     }
 
